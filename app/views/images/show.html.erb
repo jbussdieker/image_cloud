@@ -1,8 +1,9 @@
 <p id="notice"><%= notice %></p>
 
+<h3><%= @image.name %></h3>
+
 <p>
-  <strong>Name:</strong>
-  <%= @image.name %>
+  <%= link_to 'Back', images_path, class: 'btn btn-sm btn-default' %>
 </p>
 
 <p>
@@ -20,10 +21,28 @@
   <%= @image.latitude %>
 </p>
 
-<p>
-  <strong>Image:</strong>
-  <br><%= image_tag @image.time_limited_url(:medium) %>
-</p>
-
-<%= link_to 'Edit', edit_image_path(@image) %> |
-<%= link_to 'Back', images_path %>
+<div class="row">
+  <div class="col-md-6">
+    <%= image_tag @image.time_limited_url(:medium) %>
+  </div>
+  <div class="col-md-6">
+    <script type="text/javascript">
+      function initialize() {
+        var myLatlng = new google.maps.LatLng(<%= @image.latitude %>, <%= @image.longitude %>);
+        var mapOptions = {
+          center: myLatlng,
+          zoom: 2
+        };
+        var map = new google.maps.Map(document.getElementById("map"),
+            mapOptions);
+        var marker = new google.maps.Marker({
+            position: myLatlng,
+            map: map,
+            title:"Hello World!"
+        });
+      }
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+    <div id="map" style="width:320px; height:240px"> </div>
+  </div>
+</div>
