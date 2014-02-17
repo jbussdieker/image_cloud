@@ -20,5 +20,10 @@
   <%= @image.latitude %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+  <br><%= image_tag @image.image.url(:square) %>
+</p>
+
 <%= link_to 'Edit', edit_image_path(@image) %> |
 <%= link_to 'Back', images_path %>
