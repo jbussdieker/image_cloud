@@ -16,6 +16,8 @@ class Image < ActiveRecord::Base
   end
 
   def bs
+    digest = Digest::MD5.file(image.queued_for_write[:original].path)
+    self.md5sum = digest.to_s
     image_info = EXIFR::JPEG.new(image.queued_for_write[:original].path)
     if image_info.gps?
       self.latitude = image_info.gps_lat
