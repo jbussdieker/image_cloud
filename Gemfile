@@ -62,3 +62,4 @@ end
 gem 'figaro', github: 'jbussdieker/figaro'
 gem 'paperclip'
 gem 'aws-sdk'
+gem 'exifr', :git => 'git://github.com/picuous/exifr.git'
