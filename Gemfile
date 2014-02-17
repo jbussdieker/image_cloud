@@ -43,3 +43,18 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+group :test, :development do
+  gem 'thin'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
+
+group :test do
+  gem 'shoulda-matchers'
+  gem 'guard-rspec'
+  gem 'database_cleaner'
+  gem 'cucumber-rails', require: false
+  gem 'selenium-webdriver'
+  gem 'faker'
+end
