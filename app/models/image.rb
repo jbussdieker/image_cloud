@@ -11,16 +11,16 @@ class Image < ActiveRecord::Base
   # Validate the attached image is image/jpg, image/png, etc
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
+  def time_limited_url(style) 
+    image.s3_object(style).url_for(:read, expires: 1.hour)
+  end
+
   def bs
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
     image_info = EXIFR::JPEG.new(image.queued_for_write[:original].path)
     if image_info.gps?
       self.latitude = image_info.gps_lat
       self.longitude = image_info.gps_lng
     end
-    if image_info.date_time
-      self.taken_at = image_info.date_time
-    end
-    puts "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
+    self.taken_at = image_info.date_time if image_info.date_time
   end
 end

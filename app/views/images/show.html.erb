@@ -22,7 +22,7 @@
 
 <p>
   <strong>Image:</strong>
-  <br><%= image_tag @image.image.url(:square) %>
+  <br><%= image_tag @image.time_limited_url(:medium) %>
 </p>
 
 <%= link_to 'Edit', edit_image_path(@image) %> |
