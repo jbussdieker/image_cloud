@@ -5,7 +5,12 @@ class ImagesController < ApplicationController
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all
+    @images = Image.all.page params[:page]
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   # GET /images/1
