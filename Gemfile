@@ -58,3 +58,7 @@ group :test do
   gem 'selenium-webdriver'
   gem 'faker'
 end
+
+gem 'figaro', github: 'jbussdieker/figaro'
+gem 'paperclip'
+gem 'aws-sdk'
