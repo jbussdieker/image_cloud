@@ -14,11 +14,13 @@ task :upload => [:environment] do
             image = Image.new
             image.image = f
             image.name = File.basename(upload_path)
+            image.user_id = User.first.id
             image.save
             puts " * Uploaded"
           end
         else
           puts " * Duplicate"
+          match.update_attributes(user_id: User.first.id)
         end
       else
         puts " * Bad format"
