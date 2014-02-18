@@ -82,7 +82,7 @@ class ImagesController < ApplicationController
   # GET /images/tile
   # GET /images/tile.json
   def tile
-    @images = current_user.images.page(params[:page]).per(18)
+    @images = current_user.images.order(sort_column + " " + sort_direction).page(params[:page]).per(18)
 
     respond_to do |format|
       format.html
