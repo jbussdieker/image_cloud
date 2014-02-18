@@ -1,4 +1,4 @@
-<h1><%= pluralize Image.count, "Image" %></h1>
+<h1><%= pluralize current_user.images.count, "Image" %></h1>
 
 <%= link_to 'New Image', new_image_path, :class => 'btn btn-primary' %>
 
@@ -10,8 +10,8 @@
   <thead>
     <tr>
       <th></th>
-      <th>Name</th>
-      <th>Taken at</th>
+      <th><%= sortable "name" %></th>
+      <th><%= sortable "taken_at" %></th>
       <th></th>
     </tr>
   </thead>

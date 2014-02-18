@@ -1,11 +1,12 @@
 class ImagesController < ApplicationController
   before_action :set_image, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  helper_method :sort_column, :sort_direction
 
   # GET /images
   # GET /images.json
   def index
-    @images = Image.all.page params[:page]
+    @images = current_user.images.order(sort_column + " " + sort_direction).page params[:page]
 
     respond_to do |format|
       format.html
@@ -67,14 +68,33 @@ class ImagesController < ApplicationController
     end
   end
 
+  # GET /images/map
+  # GET /images/map.json
+  def map
+    @images = current_user.images #.page params[:page]
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_image
-      @image = Image.find(params[:id])
+      @image = current_user.images.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def image_params
       params.require(:image).permit(:name, :taken_at, :longitude, :latitude, :image)
+    end
+
+    def sort_column
+      Image.column_names.include?(params[:sort]) ? params[:sort] : "taken_at"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

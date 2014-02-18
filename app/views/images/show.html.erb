@@ -21,6 +21,11 @@
   <%= @image.latitude %>
 </p>
 
+<p>
+  <strong>User:</strong>
+  <%= @image.user.try(:email) %>
+</p>
+
 <div class="row">
   <div class="col-md-6">
     <%= image_tag @image.time_limited_url(:medium) %>

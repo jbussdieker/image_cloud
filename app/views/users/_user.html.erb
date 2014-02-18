@@ -1,0 +1,5 @@
+<tr>
+  <td><%= user.email %></td>
+  <td><%= user.images.count %></td>
+  <td><%= number_to_human_size user.images.sum(:image_file_size) %></td>
+</tr>

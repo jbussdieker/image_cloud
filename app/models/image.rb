@@ -1,5 +1,6 @@
 class Image < ActiveRecord::Base
   before_save :bs
+  belongs_to :user
 
   # This method associates the attribute ":image" with a file attachment
   has_attached_file :image, styles: {
@@ -15,14 +16,20 @@ class Image < ActiveRecord::Base
     image.s3_object(style).url_for(:read, expires: 1.hour)
   end
 
+  def gps?
+    latitude && longitude
+  end
+
   def bs
-    digest = Digest::MD5.file(image.queued_for_write[:original].path)
-    self.md5sum = digest.to_s
-    image_info = EXIFR::JPEG.new(image.queued_for_write[:original].path)
-    if image_info.gps?
-      self.latitude = image_info.gps_lat
-      self.longitude = image_info.gps_lng
+    unless persisted?
+      digest = Digest::MD5.file(image.queued_for_write[:original].path)
+      self.md5sum = digest.to_s
+      image_info = EXIFR::JPEG.new(image.queued_for_write[:original].path)
+      if image_info.gps?
+        self.latitude = image_info.gps_lat
+        self.longitude = image_info.gps_lng
+      end
+      self.taken_at = image_info.date_time if image_info.date_time
     end
-    self.taken_at = image_info.date_time if image_info.date_time
   end
 end
