@@ -71,7 +71,18 @@ class ImagesController < ApplicationController
   # GET /images/map
   # GET /images/map.json
   def map
-    @images = current_user.images #.page params[:page]
+    @images = current_user.images
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
+
+  # GET /images/tile
+  # GET /images/tile.json
+  def tile
+    @images = current_user.images.page(params[:page]).per(18)
 
     respond_to do |format|
       format.html

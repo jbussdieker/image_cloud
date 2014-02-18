@@ -2,6 +2,9 @@
 
 <%= link_to 'New Image', new_image_path, :class => 'btn btn-primary' %>
 
+<%= link_to 'Map', map_images_path, :class => 'btn btn-primary' %>
+<%= link_to 'Tile', tile_images_path, :class => 'btn btn-primary' %>
+
 <div id="paginator">
   <%= paginate @images, :remote => true %>
 </div>

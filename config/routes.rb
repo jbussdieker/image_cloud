@@ -4,6 +4,7 @@ ImageCloud::Application.routes.draw do
   resources :images do
     collection do
       get 'map'
+      get 'tile'
     end
   end
 

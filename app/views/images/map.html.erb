@@ -1,3 +1,10 @@
+<h1><%= pluralize current_user.images.count, "Image" %></h1>
+
+<%= link_to 'New Image', new_image_path, :class => 'btn btn-primary' %>
+<%= link_to 'List', images_path, :class => 'btn btn-primary' %>
+<%= link_to 'Tile', tile_images_path, :class => 'btn btn-primary' %>
+
+<p>
 <div id="map" style="width:640px; height:480px"> </div>
 <script type="text/javascript">
   function initialize() {
@@ -19,3 +26,4 @@
   }
   google.maps.event.addDomListener(window, 'load', initialize);
 </script>
+</p>
