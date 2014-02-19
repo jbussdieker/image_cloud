@@ -22,14 +22,18 @@ class Image < ActiveRecord::Base
 
   def bs
     unless persisted?
-      digest = Digest::MD5.file(image.queued_for_write[:original].path)
-      self.md5sum = digest.to_s
-      image_info = EXIFR::JPEG.new(image.queued_for_write[:original].path)
-      if image_info.gps?
-        self.latitude = image_info.gps_lat
-        self.longitude = image_info.gps_lng
+      begin
+        digest = Digest::MD5.file(image.queued_for_write[:original].path)
+        self.md5sum = digest.to_s
+        image_info = EXIFR::JPEG.new(image.queued_for_write[:original].path)
+        if image_info.gps?
+          self.latitude = image_info.gps_lat
+          self.longitude = image_info.gps_lng
+        end
+        self.taken_at = image_info.date_time if image_info.date_time
+      rescue Exception => e
+        logger.error "Unhandled exception #{e.message}\n#{e.backtrace.join("\n")}"
       end
-      self.taken_at = image_info.date_time if image_info.date_time
     end
   end
 end

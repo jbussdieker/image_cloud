@@ -4,7 +4,7 @@ FactoryGirl.define do
   factory :image do
     name "MyString"
     taken_at "2014-02-17 08:38:02"
-    longitude "MyString"
-    latitude "MyString"
+    longitude "0.0"
+    latitude "0.0"
   end
 end

@@ -1,5 +1,10 @@
 module UserMacros
   module Controller
+    def login(type = :user)
+      FactoryGirl.create(type).tap do |user|
+        sign_in user
+      end
+    end
   end
 
   module Request

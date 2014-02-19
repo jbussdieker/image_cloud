@@ -1,5 +1,7 @@
 require 'spec_helper'
 
 describe Image do
-  pending "add some examples to (or delete) #{__FILE__}"
+  it "should have valid factory" do
+    FactoryGirl.create(:image).should be_valid
+  end
 end

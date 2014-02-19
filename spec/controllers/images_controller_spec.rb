@@ -19,11 +19,14 @@ require 'spec_helper'
 # that an instance is receiving a specific message.
 
 describe ImagesController do
+  before(:each) do
+    @user = login
+  end
 
   # This should return the minimal set of attributes required to create a valid
   # Image. As you add validations to Image, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { "name" => "MyString", "user_id" => @user.id } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
