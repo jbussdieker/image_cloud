@@ -18,5 +18,6 @@ end
 
 RSpec.configure do |config|
   config.include UserMacros::Controller, :type => :controller
+  config.include UserMacros::Controller, :type => :view
   config.include UserMacros::Request, :type => :request
 end

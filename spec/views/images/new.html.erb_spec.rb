@@ -4,8 +4,8 @@ describe "images/new" do
   before(:each) do
     assign(:image, stub_model(Image,
       :name => "MyString",
-      :longitude => "MyString",
-      :latitude => "MyString"
+      :longitude => "0.0",
+      :latitude => "0.0"
     ).as_new_record)
   end
 

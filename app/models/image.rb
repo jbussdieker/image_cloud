@@ -13,7 +13,11 @@ class Image < ActiveRecord::Base
   validates_attachment_content_type :image, :content_type => /\Aimage\/.*\Z/
 
   def time_limited_url(style) 
-    image.s3_object(style).url_for(:read, expires: 1.hour)
+    begin
+      image.s3_object(style).url_for(:read, expires: 1.hour)
+    rescue Exception => e
+      logger.error "Unhandled exception #{e.message}\n#{e.backtrace.join("\n")}"
+    end
   end
 
   def gps?

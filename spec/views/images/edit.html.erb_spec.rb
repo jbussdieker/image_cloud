@@ -4,8 +4,8 @@ describe "images/edit" do
   before(:each) do
     @image = assign(:image, stub_model(Image,
       :name => "MyString",
-      :longitude => "MyString",
-      :latitude => "MyString"
+      :longitude => "0.0",
+      :latitude => "0.0"
     ))
   end
 

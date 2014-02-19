@@ -4,8 +4,8 @@ describe "images/show" do
   before(:each) do
     @image = assign(:image, stub_model(Image,
       :name => "Name",
-      :longitude => "Longitude",
-      :latitude => "Latitude"
+      :longitude => "0.0",
+      :latitude => "0.0"
     ))
   end
 
