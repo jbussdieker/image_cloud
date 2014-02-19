@@ -1,7 +1,7 @@
 <tr>
   <td><%= image_tag image.time_limited_url(:mini) %></td>
   <td><%= image.name %></td>
-  <td><%= image.taken_at %></td>
+  <td class="hidden-xs"><%= image.taken_at %></td>
   <td>
     <%= link_to 'Show', image, class: 'btn btn-xs btn-default' %>
     <%= link_to 'Edit', edit_image_path(image), class: 'btn btn-xs btn-default' %>
