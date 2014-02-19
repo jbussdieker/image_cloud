@@ -8,7 +8,7 @@ RSpec.configure do |config|
 
   Capybara.register_driver :chrome do |app|
     args = []
-    args << "--window-size=1280,1024"
+    #args << "--window-size=1280,1024"
     Capybara::Selenium::Driver.new(app, :browser => :chrome, :args => args)
   end
 
