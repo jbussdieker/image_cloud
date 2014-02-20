@@ -7,7 +7,7 @@
 <p>
 <div id="map" style="width:640px; height:480px"> </div>
 <script type="text/javascript">
-  function initialize() {
+  $(document).ready(function() {
     var mapOptions = {
       center: new google.maps.LatLng(0, 0),
       zoom: 1
@@ -18,12 +18,10 @@
       <% if image.gps? %>
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(<%= image.latitude || 0 %>, <%= image.longitude || 0 %>),
-            map: map,
-            title:"Hello World!"
+            map: map
         });
       <% end %>
     <% end %>
-  }
-  google.maps.event.addDomListener(window, 'load', initialize);
+  });
 </script>
 </p>
